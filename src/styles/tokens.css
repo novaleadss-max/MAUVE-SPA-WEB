@@ -1,0 +1,50 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   MAUVE — tokens. Colores, tipografía, espacios y curvas.
+   El rosa (#C98086) es el fondo exacto de la sesión de fotos: la página es
+   el mismo estudio en el que se tomaron las fotos.
+   ───────────────────────────────────────────────────────────────────────── */
+:root {
+  /* Color */
+  --rosa: #c98086;
+  --rosa-palido: #f1d9d6;
+  --ciruela: #2a1520;
+  --ciruela-2: #3b2130; /* un paso de tono sobre ciruela (superficies) */
+  --mauve: #7d78b8;
+  --lavanda: #b3b0dd;
+  --crema: #f6eee9;
+
+  /* Tinta según tema (la cabecera, el riel y el cursor la leen) */
+  --ink: var(--ciruela);
+  --paper: var(--crema);
+
+  /* Tipografía */
+  --display: "Bodoni Moda Variable", "Bodoni 72", "Didot", serif;
+  --text: "Hanken Grotesk Variable", "Helvetica Neue", Arial, sans-serif;
+  --fs-body: clamp(16px, 0.55vw + 13px, 19px);
+  --fs-small: 15px;
+  --fs-display: clamp(52px, 8.2vw, 156px);
+  --fs-mega: min(31vw, 54svh);
+  --fs-statement: clamp(28px, 3.3vw, 56px);
+
+  /* Espacio */
+  --gutter: clamp(16px, 2.2vw, 34px);
+  --header-h: 76px;
+
+  /* Curvas: las mismas que src/config.js (EASES) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-soft: cubic-bezier(0.45, 0, 0.2, 1);
+
+  /* Duraciones de interfaz */
+  --t-press: 140ms;
+  --t-hover: 220ms;
+  --t-fill: 520ms;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --header-h: 64px;
+    --fs-mega: 31vw;
+  }
+}
