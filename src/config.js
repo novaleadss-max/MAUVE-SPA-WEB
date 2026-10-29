@@ -17,13 +17,13 @@ export const COLORS = {
 /* ── Duración de scroll de cada capítulo ───────────────────────────────────
  * "+=150%" = el capítulo dura 1.5 alturas de pantalla de scroll.
  * Súbelo para que el capítulo vaya más lento; bájalo para que pase más rápido. */
-export const CAPITULO_1_SCROLL = "+=150%"; // Inicio: el tulipán se abre
-export const CAPITULO_2_SCROLL = "+=220%"; // El color: secuencia de cabello
-export const CAPITULO_3_SCROLL = "+=200%"; // El detalle: abanico de uñas
-export const CAPITULO_4_SCROLL = "+=170%"; // El remate: el salón + la marca
-export const CAPITULO_5_SCROLL = "+=320%"; // Servicios: carril horizontal
-export const GALERIA_SCROLL = "+=320%"; // Galería infinita fijada
-export const CAPITULO_6_SCROLL = "+=140%"; // Historia: texto que se rellena
+export const CAPITULO_1_SCROLL = "+=130%"; // Inicio: el tulipán se abre
+export const CAPITULO_2_SCROLL = "+=180%"; // El color: secuencia de cabello
+export const CAPITULO_3_SCROLL = "+=150%"; // El detalle: abanico de uñas
+export const CAPITULO_4_SCROLL = "+=150%"; // El remate: el salón + la marca
+export const CAPITULO_5_SCROLL = "+=280%"; // Servicios: carril horizontal
+export const GALERIA_SCROLL = "+=240%"; // Galería infinita fijada
+export const CAPITULO_6_SCROLL = "+=110%"; // Historia: texto que se rellena
 
 /** En celular todos los capítulos se acortan por este factor (menos pin, nada "atorado"). */
 export const FACTOR_SCROLL_MOVIL = 0.62;
@@ -58,8 +58,8 @@ export const GALERIA = {
 
 /* ── 3D: tulipán ──────────────────────────────────────────────────────── */
 export const TULIPAN = {
-  dprMax: 2, // densidad de píxeles máxima en escritorio
-  dprMaxMovil: 1.5,
+  dprMax: 1.5, // densidad de píxeles máxima en escritorio
+  dprMaxMovil: 1.25,
   segmentos: 28, // resolución de cada pétalo (móvil usa la mitad)
   respuestaMouse: 0.06, // qué tan rápido sigue al mouse (0-1)
   inclinacionMouse: 0.38, // radianes máximos de inclinación con el mouse

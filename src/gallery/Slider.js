@@ -52,6 +52,7 @@ export default class Slider {
       factor: (parseFloat(el.dataset.speed || 1) - 1) * 0.75,
       offset: 0,
       visible: false,
+      setY: gsap.quickSetter(el, "y", "px"),
     }));
     this.applyParallax(true);
   }
@@ -59,13 +60,15 @@ export default class Slider {
   applyParallax(immediate = false) {
     const changes = [];
     const vh = window.innerHeight;
-    this.parallax.forEach((item) => {
-      const rect = item.el.getBoundingClientRect();
+    // All reads first, then all writes: one layout per frame instead of one per slide
+    const tops = this.parallax.map((item) => item.el.getBoundingClientRect());
+    this.parallax.forEach((item, i) => {
+      const rect = tops[i];
       const loopTop = rect.top - item.offset;
       // Zero offset when the slide crosses the middle of the screen, so speeds
       // diverge evenly above and below instead of tearing open gaps at the bottom
       item.offset = item.factor * (loopTop + rect.height / 2 - vh / 2);
-      gsap.set(item.el, { y: item.offset });
+      item.setY(item.offset);
       const top = loopTop + item.offset;
       const visible = top < vh && top + rect.height > 0;
       if (visible !== item.visible) {
@@ -100,7 +103,9 @@ export default class Slider {
     const dt = Math.max(now - this.last.at, 1);
     const v = ((this.playhead.time - this.last.time) / dt) * 1000; // loop-seconds per second
     this.last = { time: this.playhead.time, at: now, vel: v };
-    const deg = gsap.utils.clamp(-14, 14, v * -0.9);
+    const deg = Math.round(gsap.utils.clamp(-12, 12, v * -0.9) * 4) / 4;
+    if (deg === this.lastBend) return;
+    this.lastBend = deg;
     this.bend.forEach((set) => set(deg));
   }
 

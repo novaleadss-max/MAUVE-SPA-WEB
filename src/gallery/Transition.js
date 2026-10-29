@@ -73,9 +73,9 @@ export default class Transition {
     gsap.set(wrapper, { autoAlpha: 0 });
 
     this.split = SplitText.create(this.content.querySelectorAll(".content__group.active > :not(a)"), {
-      type: "lines,chars",
+      type: "lines,words",
       linesClass: "split-line",
-      charsClass: "char",
+      wordsClass: "word",
       mask: "lines",
     });
     const cta = this.content.querySelector(".content__group.active .content__cta");
@@ -99,9 +99,9 @@ export default class Transition {
 
     this.split.lines.forEach((line, i) => {
       this.tl.fromTo(
-        line.querySelectorAll(".char"),
-        { yPercent: 125 },
-        { yPercent: 0, duration: 0.9, ease: "m-out", stagger: 0.012 },
+        line.querySelectorAll(".word"),
+        { yPercent: 118 },
+        { yPercent: 0, duration: 0.9, ease: "m-out", stagger: 0.03 },
         0.72 + i * 0.07,
       );
     });

@@ -9,7 +9,8 @@ import "./styles/main.css";
 
 import { gsap, ScrollTrigger, env, initScroll, lockScroll, splitChars, lenis } from "./core/motion.js";
 import { runPreloader } from "./preloader.js";
-import { createTulipState } from "./three/state.js";
+import { createTulipState } from "./flower-state.js";
+import { Bloom } from "./bloom.js";
 import { initStory } from "./story.js";
 import { initGallery } from "./gallery/index.js";
 import { initHistory, initClosing, initMarquee, initNavigation, initSectionStates, setTheme, setChapter } from "./sections.js";
@@ -22,20 +23,10 @@ const html = document.documentElement;
 initScroll();
 lockScroll(true);
 
-/* 3D: the timelines animate a plain state object from the start; Three.js
-   arrives as its own chunk once the page has loaded and picks it up */
-const canvas = document.querySelector(".tulip-canvas");
+/* The flower: the timelines animate a plain state object; bloom.js turns it
+   into CSS 3D transforms (no WebGL, nothing to download, nothing to compile) */
 const tulip = createTulipState();
-let renderer = null;
-const mountTulip = () =>
-  import("./three/Tulip.js")
-    .then(({ Tulip }) => {
-      const t = new Tulip(canvas, { mobile: env.mobile, state: tulip.state, intro: tulip.intro, hover: tulip.hover });
-      renderer = t.ok ? t : null;
-    })
-    .catch(() => (renderer = null));
-const afterLoad = new Promise((r) => (document.readyState === "complete" ? r() : window.addEventListener("load", r, { once: true })));
-afterLoad.then(() => (window.requestIdleCallback ? requestIdleCallback(mountTulip, { timeout: 1200 }) : setTimeout(mountTulip, 300)));
+const renderer = new Bloom(document.querySelector(".bloom"), { state: tulip.state, intro: tulip.intro, hover: tulip.hover, mobile: env.mobile });
 
 /* Assets the first screen needs */
 const tasks = [
@@ -81,6 +72,7 @@ function boot() {
     initMagnetic();
     initTilt();
     ScrollTrigger.refresh();
+    predecode();
   };
   if (window.requestIdleCallback) requestIdleCallback(later, { timeout: 1500 });
   else setTimeout(later, 300);
@@ -94,7 +86,7 @@ function boot() {
       end: () => st.end,
       onUpdate: (self) => {
         const u = (self.scroll() - st.start) / window.innerHeight;
-        const covered = at.c4 + L.c4 * 0.62; // the petal curtain has covered the screen
+        const covered = at.c4 + L.c4 * 0.7; // the petal curtain has covered the screen
         setTheme(u < covered ? "ink" : "light");
         const chapter = u < at.c2 - L.c1 * 0.2 ? "inicio" : u < at.c3 - L.c2 * 0.1 ? "color" : u < at.c4 - L.c3 * 0.1 ? "detalle" : u < at.c5 ? "remate" : "servicios";
         setChapter(chapter);
@@ -112,6 +104,22 @@ function boot() {
     tulip.intro.v = 1;
     ScrollTrigger.create({ trigger: ".ch1", start: "top top", end: "bottom top", onLeave: () => (tulip.state.opacity = 0), onEnterBack: () => (tulip.state.opacity = 1) });
   }
+}
+
+/**
+ * Decode every picture the story and the gallery will show, one at a time in
+ * idle moments, so no image is decoded in the same frame it first appears
+ * (that was the source of the remaining hitches).
+ */
+function predecode() {
+  const imgs = [...document.querySelectorAll(".story img, .gallery-sec img, .history img, .cta img")];
+  const next = () => {
+    const img = imgs.shift();
+    if (!img) return;
+    img.loading = "eager";
+    img.decode().catch(() => {}).finally(() => (window.requestIdleCallback ? requestIdleCallback(next, { timeout: 600 }) : setTimeout(next, 50)));
+  };
+  next();
 }
 
 /* Preloader, then the intro */

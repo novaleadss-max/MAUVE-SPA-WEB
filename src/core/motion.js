@@ -59,7 +59,23 @@ export function lockScroll(lock) {
   document.documentElement.style.overflow = lock ? "hidden" : "";
 }
 
-/** Split into masked lines + chars (aria handled by SplitText). */
+/**
+ * Headlines and sentences: split into masked lines and whole words.
+ * Words are never cut into letters, so kerning (Bodoni's "Uñ", "Ta", "Ma")
+ * and accented letters stay exactly as the font draws them.
+ */
+export function splitWords(target, extra = {}) {
+  return SplitText.create(target, {
+    type: "lines,words",
+    linesClass: "split-line",
+    wordsClass: "word",
+    mask: "lines",
+    aria: "auto",
+    ...extra,
+  });
+}
+
+/** Letter by letter: only for the five-letter "Mauve" wordmarks. */
 export function splitChars(target, extra = {}) {
   return SplitText.create(target, {
     type: "lines,chars",

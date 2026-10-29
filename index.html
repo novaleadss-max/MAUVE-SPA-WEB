@@ -139,7 +139,21 @@
     </ol>
   </nav>
 
-  <canvas class="tulip-canvas" aria-hidden="true"></canvas>
+  <div class="bloom" aria-hidden="true">
+    <div class="bloom__shadow"></div>
+    <div class="bloom__tilt">
+      <svg class="bloom__petal" data-ring="outer" data-side="-1" data-z="0" viewBox="0 0 120 100"><path d="M60 88 C43 89 31 79 26 62 C39 66 52 75 60 88Z" fill="#6f6aab" /><path d="M60 88 C43 89 31 79 26 62 C39 66 52 75 60 88Z" fill="#8c87c6" transform="translate(60 88) scale(.62) translate(-60 -88)" opacity=".55" /></svg>
+      <svg class="bloom__petal" data-ring="outer" data-side="1" data-z="0" viewBox="0 0 120 100"><path d="M60 88 C77 89 89 79 94 62 C81 66 68 75 60 88Z" fill="#6f6aab" /><path d="M60 88 C77 89 89 79 94 62 C81 66 68 75 60 88Z" fill="#8c87c6" transform="translate(60 88) scale(.62) translate(-60 -88)" opacity=".55" /></svg>
+      <svg class="bloom__petal" data-ring="mid" data-side="-1" data-z="22" viewBox="0 0 120 100"><path d="M60 87 C46 82 39 68 41 50 C51 57 57 70 60 87Z" fill="#a9a5da" /><path d="M60 87 C46 82 39 68 41 50 C51 57 57 70 60 87Z" fill="#c4c1e8" transform="translate(60 88) scale(.62) translate(-60 -88)" opacity=".55" /></svg>
+      <svg class="bloom__petal" data-ring="mid" data-side="1" data-z="22" viewBox="0 0 120 100"><path d="M60 87 C74 82 81 68 79 50 C69 57 63 70 60 87Z" fill="#a9a5da" /><path d="M60 87 C74 82 81 68 79 50 C69 57 63 70 60 87Z" fill="#c4c1e8" transform="translate(60 88) scale(.62) translate(-60 -88)" opacity=".55" /></svg>
+      <svg class="bloom__petal" data-ring="center" data-side="0" data-z="44" viewBox="0 0 120 100"><path d="M60 42 C70 55 72 72 60 87 C48 72 50 55 60 42Z" fill="#8f8acb" /><path d="M60 42 C70 55 72 72 60 87 C48 72 50 55 60 42Z" fill="#b3b0dd" transform="translate(60 88) scale(.62) translate(-60 -88)" opacity=".55" /></svg>
+    </div>
+    <div class="bloom__loose">
+      <svg class="bloom__drift bloom__drift--a" viewBox="0 0 120 100"><path d="M60 87 C46 82 39 68 41 50 C51 57 57 70 60 87Z" fill="#a9a5da" /></svg>
+      <svg class="bloom__drift bloom__drift--b" viewBox="0 0 120 100"><path d="M60 88 C43 89 31 79 26 62 C39 66 52 75 60 88Z" fill="#7d78b8" /></svg>
+      <svg class="bloom__drift bloom__drift--c" viewBox="0 0 120 100"><path d="M60 42 C70 55 72 72 60 87 C48 72 50 55 60 42Z" fill="#b3b0dd" /></svg>
+    </div>
+  </div>
 
   <main id="contenido">
     <!-- ═══ SCROLLYTELLING: capítulos 1 a 5 viven en un escenario fijado ═══ -->
@@ -149,19 +163,20 @@
       <div class="chapter ch1" id="inicio" data-chapter="inicio" data-theme="ink">
         <h1 class="hero__title"><span class="hero__word" translate="no">Mauve</span><span class="sr-only">: salón, uñas y spa en Puebla</span></h1>
         <div class="hero__figure">%%PIC_HERO%%</div>
-        <p class="hero__lede">Salón, uñas y spa<br />en Puebla.</p>
+        <p class="hero__lede">Salón, uñas y spa <br />en Puebla.</p>
         <a class="btn hero__cta js-magnetic" href="%%WA_MAIN%%" target="_blank" rel="noopener"><span>Agenda por WhatsApp</span></a>
         <p class="hero__cue" aria-hidden="true"><span class="hero__cue-dot"></span>Desliza</p>
-        <p class="statement ch1__phrase">Entras como eres.<br />Sales en flor.</p>
+        <p class="statement ch1__phrase">Entras como eres. <br />Sales en flor.</p>
+        <div class="ch1__shade" aria-hidden="true"></div>
       </div>
 
       <!-- CAPÍTULO 2 · EL COLOR -->
       <div class="chapter ch2" id="color" data-chapter="color" data-theme="ink">
         <div class="ch2__inner">
           <div class="ch2__copy">
-            <h2 class="display ch2__title">Tu color,<br />a tu manera.</h2>
+            <h2 class="display ch2__title">Tu color, <br />a tu manera.</h2>
             <p class="ch2__look" aria-live="polite"><span class="ch2__look-track"><span>Balayage</span><span>Ondas</span><span>Capas</span></span></p>
-            <p class="ch2__sub">Color, corte y peinado.<br />Seis looks de una misma sesión.</p>
+            <p class="ch2__sub">Color, corte y peinado. <br />Seis looks de una misma sesión.</p>
           </div>
           <div class="hair">
             <!-- BLOCK:HAIR -->
@@ -172,20 +187,21 @@
 
       <!-- CAPÍTULO 3 · EL DETALLE -->
       <div class="chapter ch3" id="detalle" data-chapter="detalle" data-theme="ink">
-        <h2 class="display ch3__title">Uña por uña,<br />a mano.</h2>
+        <div class="ch3__tint" aria-hidden="true"></div>
+        <h2 class="display ch3__title">Uña por uña, <br />a mano.</h2>
         <div class="nails" aria-label="Diseños de uñas">
           <!-- BLOCK:NAILS -->
         </div>
-        <p class="ch3__sub">Gel, french y arte pintado a mano.</p>
+        <p class="ch3__sub">Gel, estilo francés y arte pintado a mano.</p>
       </div>
 
       <!-- CAPÍTULO 4 · EL REMATE -->
       <div class="chapter ch4" id="remate" data-chapter="remate" data-theme="light">
         <div class="finale__window">%%PIC_SALON%%</div>
-        <p class="statement ch4__phrase">Lista<br />para salir.</p>
-        <svg class="curtain" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <path class="curtain__petal" d="M50 0 C76 4 100 20 100 34 L100 100 L0 100 L0 34 C0 20 24 4 50 0Z" />
-        </svg>
+        <div class="ch4__panel">
+          <p class="statement ch4__phrase">Lista <br />para salir.</p>
+        </div>
+        <div class="curtain" aria-hidden="true"></div>
         <div class="ch4__brand">
           <p class="ch4__name" aria-hidden="true" translate="no">Mauve</p>
           <p class="ch4__tag">Salón · Uñas · Spa</p>
@@ -198,7 +214,7 @@
         <div class="svc-track">
   <div class="ch5__head">
           <h2 class="display ch5__title">Servicios</h2>
-          <p class="ch5__sub">Todo en un mismo lugar.<br />Precios y citas por WhatsApp.</p>
+          <p class="ch5__sub">Todo en un mismo lugar. <br />Precios y citas por WhatsApp.</p>
         </div>
           <!-- BLOCK:SERVICES -->
           <div class="svc-end">
@@ -213,7 +229,7 @@
     <section class="gallery-sec" id="galeria" data-chapter="galeria" data-theme="light" aria-labelledby="galeria-title">
       <div class="gallery-sec__head">
         <h2 class="display gallery-sec__title" id="galeria-title">La sesión</h2>
-        <p class="gallery-sec__sub">Desliza para recorrerla.<br />Toca una foto para verla completa.</p>
+        <p class="gallery-sec__sub">Desliza para recorrerla. <br />Toca una foto para verla completa.</p>
         <button class="btn btn--light btn--ghost js-magnetic js-endless" type="button"><span>Verla sin fin</span></button>
       </div>
       <div class="gallery">
@@ -247,7 +263,7 @@
 
     <!-- CAPÍTULO 7 · TU CITA -->
     <section class="cta" id="visitanos" data-chapter="visitanos" data-theme="ink" aria-labelledby="cta-title">
-      <h2 class="display cta__title" id="cta-title">Tu cita,<br />a un mensaje.</h2>
+      <h2 class="display cta__title" id="cta-title">Tu cita, <br />a un mensaje.</h2>
       <div class="cta__action">
         <a class="cta__button js-magnetic js-bloom" href="%%WA_MAIN%%" target="_blank" rel="noopener">
           <span class="cta__button-text">Agenda por WhatsApp</span>
@@ -255,7 +271,7 @@
         </a>
       </div>
       <dl class="cta__info">
-        <div><dt>Dónde</dt><dd><a class="link-line" href="%%MAPS%%" target="_blank" rel="noopener">%%STREET%%, %%AREA%%<br />%%CITY%%</a></dd></div>
+        <div><dt>Dónde</dt><dd><a class="link-line" href="%%MAPS%%" target="_blank" rel="noopener">%%STREET%%, %%AREA%% <br />%%CITY%%</a></dd></div>
         <div><dt>WhatsApp</dt><dd><a class="link-line" href="%%WA_MAIN%%" target="_blank" rel="noopener">%%WA_DISPLAY%%</a></dd></div>
         <div><dt>Instagram</dt><dd><a class="link-line" href="%%IG%%" target="_blank" rel="noopener">%%IG_HANDLE%%</a></dd></div>
         <div><dt>Horario</dt><dd>%%HOURS%%</dd></div>
@@ -266,7 +282,7 @@
 
   <footer class="footer" data-theme="light">
     <div class="footer__top">
-      <p class="footer__line">Salón · Uñas · Spa<br />Puebla, México</p>
+      <p class="footer__line">Salón · Uñas · Spa <br />Puebla, México</p>
       <nav class="footer__nav" aria-label="Pie de página">
         <a class="link-line" href="%%WA_MAIN%%" target="_blank" rel="noopener">WhatsApp</a>
         <a class="link-line" href="%%IG%%" target="_blank" rel="noopener">Instagram</a>

@@ -2,7 +2,7 @@
  * MAUVE — secciones después del escenario: historia (cap. 6), cita (cap. 7),
  * marquee y footer. También el tema de la cabecera y el riel de capítulos.
  */
-import { gsap, ScrollTrigger, env, scrollLength, splitChars, scrollTo, lenis } from "./core/motion.js";
+import { gsap, ScrollTrigger, env, scrollLength, splitWords, splitChars, scrollTo, lenis } from "./core/motion.js";
 import { CAPITULO_6_SCROLL } from "./config.js";
 
 const themed = () => document.querySelectorAll(".site-header, .rail, .cursor");
@@ -80,9 +80,9 @@ export function initHistory() {
   });
 
   // The title arrives with the section
-  const title = splitChars(sec.querySelector(".history__title"));
-  gsap.from(title.chars, {
-    yPercent: 125, duration: 0.9, ease: "m-out", stagger: 0.02,
+  const title = splitWords(sec.querySelector(".history__title"));
+  gsap.from(title.words, {
+    yPercent: 118, duration: 0.9, ease: "m-out", stagger: 0.05,
     scrollTrigger: { trigger: sec, start: "top 70%", once: true },
   });
 }
@@ -98,9 +98,9 @@ function SplitWords(el) {
 /** Chapter 7 + footer entrances, and the tulip's last appearance. */
 export function initClosing({ tulip }) {
   const cta = document.querySelector(".cta");
-  const title = splitChars(cta.querySelector(".cta__title"));
+  const title = splitWords(cta.querySelector(".cta__title"));
   const tl = gsap.timeline({ scrollTrigger: { trigger: cta, start: "top 62%", once: true } });
-  tl.from(title.chars, { yPercent: 125, duration: 1.1, ease: "m-out", stagger: 0.016 })
+  tl.from(title.words, { yPercent: 118, duration: 1, ease: "m-out", stagger: 0.06 })
     .from(".cta__button", { scale: 0.9, autoAlpha: 0, duration: 1, ease: "m-out" }, 0.25)
     .from(".cta__info > div", { y: 28, autoAlpha: 0, duration: 0.8, ease: "m-out", stagger: 0.07 }, 0.4)
     .from(".cta__pic", { clipPath: "inset(100% 0% 0% 0%)", duration: 1.2, ease: "m-inOut" }, 0.2)
@@ -138,7 +138,7 @@ export function initClosing({ tulip }) {
   // Footer: the name returns at full width, letter by letter
   const word = splitChars(document.querySelector(".footer__word"), { aria: "none" });
   gsap.from(word.chars, {
-    yPercent: 125, duration: 1.3, ease: "m-out", stagger: 0.06,
+    yPercent: 118, duration: 1.2, ease: "m-out", stagger: 0.05,
     scrollTrigger: { trigger: ".footer__word", start: "top 95%", once: true },
   });
 }
