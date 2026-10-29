@@ -325,8 +325,8 @@ h1, h2, h3, .statement { text-wrap: balance; }
 .hero__word { display: inline-block; }
 .hero__figure {
   position: absolute; bottom: 0; left: 50%;
-  height: min(88svh, 133vw);
-  aspect-ratio: 1086 / 1448;
+  height: min(88svh, 125vw);
+  aspect-ratio: 1122 / 1402;
   transform: translateX(-50%);
   z-index: 2;
 }
@@ -364,7 +364,7 @@ h1, h2, h3, .statement { text-wrap: balance; }
 
 @media (max-width: 760px) {
   .hero__title { top: calc(var(--header-h) + 3svh); }
-  .hero__figure { height: min(70svh, 133vw); }
+  .hero__figure { height: min(64svh, 125vw); }
   .hero__lede {
     left: 0; right: 0; bottom: auto; top: calc(var(--header-h) + 3svh + 27vw);
     margin: 0 auto; text-align: center; font-size: 18px;
