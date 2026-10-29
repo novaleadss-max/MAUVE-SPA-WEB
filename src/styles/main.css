@@ -346,8 +346,8 @@ h1, h2, h3, .statement { text-wrap: balance; }
 }
 .ch1__shade { position: absolute; inset: 0; z-index: 4; background: var(--ciruela); opacity: 0; pointer-events: none; }
 .ch1__phrase {
-  position: absolute; right: 8vw; bottom: 16svh; z-index: 3;
-  max-width: 11em; text-align: right;
+  position: absolute; right: 8vw; bottom: 14svh; z-index: 3;
+  max-width: 14em; text-align: right;
   visibility: hidden;
 }
 .is-story .ch1__phrase { visibility: visible; }
