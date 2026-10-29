@@ -1,10 +1,10 @@
 # Mauve · sitio web
 
 Salón, uñas y spa en Puebla. Sitio de una sola página con scrollytelling,
-un tulipán en 3D ligero (el del logo, en capas CSS) y una galería infinita de la sesión de fotos.
+un tulipán lila real que florece con el scroll (cuadros de un video, sin WebGL) y una galería infinita de la sesión de fotos.
 
 Rendimiento: todo lo que se mueve con el scroll usa sólo transform y opacity
-(nada de clip-path, filtros ni fondos animados), y el tulipán no usa WebGL.
+(nada de clip-path, filtros ni fondos animados). El tulipán sólo redibuja su canvas cuando cambia cuánto está abierto.
 
 ## Correr el proyecto
 
@@ -27,10 +27,11 @@ npm run images     # vuelve a generar las fotos (AVIF + WebP en 480/800/1200 px)
 | Animaciones de los capítulos 1 a 5      | `src/story.js`                                |
 | Capítulos 6 y 7, marquee, footer        | `src/sections.js`                             |
 | Galería infinita y preview              | `src/gallery/`                                |
-| Tulipán 3D (CSS 3D, sin WebGL)          | `src/bloom.js` y su estado en `src/flower-state.js` |
+| Tulipán que florece                     | `src/bloom.js` (estado en `src/flower-state.js`); cuadros en `public/flor/` |
 
 Para agregar fotos: pon el PNG/JPG en `assets/fotos/` y corre `npm run images`.
-Las originales que mandaste están en `assets/originales/`.
+Las originales que mandaste están en `assets/originales/` (incluido el video del tulipán).
+Para regenerar los cuadros del tulipán desde el video: ver la cabecera de `scripts/flor-desde-video.py`.
 
 ## Pendiente antes de publicar
 

@@ -268,23 +268,14 @@ h1, h2, h3, .statement { text-wrap: balance; }
   opacity: 0; visibility: hidden;
   transform-origin: 50% 50%;
   will-change: transform, opacity;
-  perspective: 900px;
+  perspective: 1200px;
 }
-.bloom__tilt { position: absolute; inset: 10%; transform-style: preserve-3d; will-change: transform; }
-.bloom__petal { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; transform-origin: 50% 88%; }
-/* The flower truly floats, so it earns one soft shadow on the ground below it */
+.bloom__tilt { position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform; }
+.bloom__canvas { display: block; width: 100%; height: 100%; }
+/* The flower truly floats, so it earns one soft shadow below it */
 .bloom__shadow {
-  position: absolute; left: 30%; right: 30%; bottom: 6%; height: 7%;
-  border-radius: 50%; background: var(--ciruela); opacity: 0.16; filter: blur(12px);
-}
-.bloom__loose { position: absolute; inset: 0; transition: opacity 400ms var(--ease-soft); }
-.bloom__drift { position: absolute; width: 16%; height: auto; overflow: visible; animation: drift 9s var(--ease-in-out) infinite alternate; }
-.bloom__drift--a { left: -6%; top: 22%; }
-.bloom__drift--b { right: -4%; top: 8%; width: 12%; animation-duration: 11s; animation-delay: -4s; }
-.bloom__drift--c { right: 4%; bottom: 14%; width: 10%; animation-duration: 7s; animation-delay: -2s; }
-@keyframes drift {
-  from { transform: translate3d(0, 0, 0) rotate(-18deg); }
-  to { transform: translate3d(14px, -26px, 0) rotate(24deg); }
+  position: absolute; left: 34%; right: 34%; bottom: -6%; height: 6%;
+  border-radius: 50%; background: var(--ciruela); opacity: 0.14; filter: blur(12px);
 }
 .petal-rain { position: fixed; inset: 0; z-index: 9500; width: 100%; height: 100%; pointer-events: none; }
 
@@ -331,8 +322,7 @@ h1, h2, h3, .statement { text-wrap: balance; }
   z-index: 2;
 }
 .hero__figure img { object-fit: contain; object-position: 50% 100%; }
-/* The shoulder edges of the source photo are feathered into its alpha channel
-   (assets/fotos/retrato-recorte.png), so no CSS mask runs while it scales */
+/* The portrait is shown whole: a clean cut-out, nothing faded or cropped */
 .hero__pic { display: block; }
 .hero__lede {
   position: absolute; left: var(--gutter); bottom: calc(var(--gutter) * 2.4);

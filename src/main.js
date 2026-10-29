@@ -27,6 +27,9 @@ lockScroll(true);
    into CSS 3D transforms (no WebGL, nothing to download, nothing to compile) */
 const tulip = createTulipState();
 const renderer = new Bloom(document.querySelector(".bloom"), { state: tulip.state, intro: tulip.intro, hover: tulip.hover, mobile: env.mobile });
+// The frames (≈0.4–0.8 MB) download after the page has loaded, never ahead of the hero
+const whenLoaded = new Promise((r) => (document.readyState === "complete" ? r() : window.addEventListener("load", r, { once: true })));
+whenLoaded.then(() => (window.requestIdleCallback ? requestIdleCallback(() => renderer.load(), { timeout: 800 }) : renderer.load()));
 
 /* Assets the first screen needs */
 const tasks = [

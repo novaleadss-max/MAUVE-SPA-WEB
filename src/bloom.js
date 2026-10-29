@@ -1,16 +1,25 @@
 /**
- * MAUVE — el tulipán del logo en 3D ligero (CSS, sin WebGL).
+ * MAUVE — el tulipán lila que florece.
  *
- * Los cinco pétalos del logo son capas SVG separadas, cada una a una
- * profundidad distinta (translateZ) dentro de un contenedor con perspectiva.
- * Al inclinarse con el mouse o el giroscopio, las capas se desplazan entre sí
- * y la flor gana volumen. Abrirla = rotar cada pétalo desde su base.
+ * Viene de un video (assets/originales/tulipan-video.mp4) recortado de su
+ * pantalla verde y convertido en una hoja de 36 cuadros con transparencia
+ * (public/flor/, script: scripts/flor-desde-video.py). Una hoja de cuadros en
+ * vez de un video con alfa porque Safari/iPhone no muestran video transparente.
  *
- * Todo es transform y opacity: la GPU lo compone sin volver a dibujar nada.
- * Los capítulos animan `state` con GSAP; aquí sólo se traduce a estilos.
+ * `state.open` (0 = capullo, 1 = abierto) elige el cuadro: el scroll hace
+ * florecer la flor. Entre dos cuadros se funden para que no se note el salto.
+ * Sólo se redibuja el canvas cuando la apertura cambia; moverla, escalarla e
+ * inclinarla es transform puro, sin dibujar nada.
  */
 import { gsap } from "gsap";
 import { TULIPAN } from "./config.js";
+
+const SHEET = {
+  desktop: { src: "/flor/tulipan-desktop.webp", w: 680, h: 492 },
+  mobile: { src: "/flor/tulipan-mobile.webp", w: 380, h: 275 },
+  frames: 36,
+  cols: 6,
+};
 
 export class Bloom {
   constructor(el, { state, intro, hover, mobile = false }) {
@@ -20,16 +29,16 @@ export class Bloom {
     this.hover = hover;
     this.mobile = mobile;
     this.tiltEl = el.querySelector(".bloom__tilt");
-    this.petals = [...el.querySelectorAll(".bloom__petal")].map((p) => ({
-      el: p,
-      ring: p.dataset.ring, // outer | mid | center
-      side: Number(p.dataset.side || 0), // -1 left, 1 right, 0 centre
-      z: Number(p.dataset.z || 0),
-    }));
-    this.loose = el.querySelector(".bloom__loose");
+    this.canvas = el.querySelector(".bloom__canvas");
+    this.ctx = this.canvas.getContext("2d");
+    this.sheet = mobile ? SHEET.mobile : SHEET.desktop;
+    this.canvas.width = this.sheet.w;
+    this.canvas.height = this.sheet.h;
     this.pointer = { x: 0, y: 0, tx: 0, ty: 0 };
+    this.appear = { v: 0 };
     this.time = 0;
-    this.last = "";
+    this.drawn = -1;
+    this.hidden = true;
 
     this.resize();
     window.addEventListener("resize", () => this.resize());
@@ -42,13 +51,30 @@ export class Bloom {
     gsap.ticker.add(this.tick);
   }
 
-  /** The box is sized once for the largest flower the story uses. */
+  /** Download and decode the frames off the critical path; fade in when ready. */
+  load() {
+    const img = new Image();
+    img.decoding = "async";
+    img.src = this.sheet.src;
+    return img.decode()
+      .then(() => (window.createImageBitmap ? createImageBitmap(img) : img))
+      .then((bmp) => {
+        this.bitmap = bmp;
+        this.drawn = -1;
+        gsap.to(this.appear, { v: 1, duration: 0.9, ease: "m-out" });
+      })
+      .catch(() => {});
+  }
+
+  /** The box keeps the frame's proportions; its height is sized once. */
   resize() {
     this.vw = window.innerWidth;
     this.vh = window.innerHeight;
     this.unit = Math.min(this.vh, this.vw * 1.3);
-    this.size = Math.round(0.4 * this.unit / 0.8); // flower ≈ 80% of the box height
-    this.el.style.width = this.el.style.height = `${this.size}px`;
+    this.boxH = Math.round((0.4 * this.unit) / 0.9); // the flower is ~90% of the frame height
+    this.boxW = Math.round(this.boxH * (this.sheet.w / this.sheet.h));
+    this.el.style.width = `${this.boxW}px`;
+    this.el.style.height = `${this.boxH}px`;
   }
 
   listenGyro() {
@@ -60,7 +86,6 @@ export class Bloom {
     const DOE = window.DeviceOrientationEvent;
     if (!DOE || !matchMedia("(pointer: coarse)").matches) return;
     if (typeof DOE.requestPermission === "function") {
-      // iOS needs a gesture: ask once, on the first tap anywhere
       window.addEventListener("touchend", () => {
         DOE.requestPermission().then((s) => s === "granted" && window.addEventListener("deviceorientation", onOrient)).catch(() => {});
       }, { once: true });
@@ -69,19 +94,36 @@ export class Bloom {
     }
   }
 
+  /** Draw the bloom at a fractional frame: two neighbours blended. */
+  draw(f) {
+    const { w, h } = this.sheet;
+    const i = Math.floor(f);
+    const t = f - i;
+    const c = this.ctx;
+    const src = (n) => [(n % SHEET.cols) * w, Math.floor(n / SHEET.cols) * h];
+    c.clearRect(0, 0, w, h);
+    c.globalAlpha = 1;
+    c.drawImage(this.bitmap, ...src(i), w, h, 0, 0, w, h);
+    if (t > 0.02 && i + 1 < SHEET.frames) {
+      c.globalAlpha = t;
+      c.drawImage(this.bitmap, ...src(i + 1), w, h, 0, 0, w, h);
+    }
+  }
+
   tick(_, deltaMs) {
     const s = this.state;
-    const alpha = s.opacity * Math.min(1, this.intro.v * 1.6);
-    if (alpha < 0.005) {
-      if (this.last !== "hidden") {
-        this.el.style.opacity = "0";
+    const alpha = s.opacity * Math.min(1, this.intro.v * 1.6) * this.appear.v;
+    if (alpha < 0.005 || !this.bitmap) {
+      if (!this.hidden) {
         this.el.style.visibility = "hidden";
-        this.last = "hidden";
+        this.hidden = true;
       }
       return;
     }
-    if (this.last === "hidden") this.el.style.visibility = "visible";
-    this.last = "shown";
+    if (this.hidden) {
+      this.el.style.visibility = "visible";
+      this.hidden = false;
+    }
 
     const dt = Math.min(deltaMs / 1000, 0.05);
     this.time += dt;
@@ -89,35 +131,26 @@ export class Bloom {
     this.pointer.x += (this.pointer.tx - this.pointer.x) * k;
     this.pointer.y += (this.pointer.ty - this.pointer.y) * k;
 
-    // Place: one transform on the box
+    // Place: one transform on the box (compositor only)
     const flowerPx = s.scale * this.unit * (0.55 + 0.45 * this.intro.v);
-    const fit = flowerPx / (0.8 * this.size);
+    const fit = flowerPx / (0.9 * this.boxH);
     const bob = Math.sin(this.time * 1.1) * TULIPAN.flotacion * this.unit;
-    const x = ((s.x + 1) / 2) * this.vw - this.size / 2;
-    const y = ((1 - s.y) / 2) * this.vh - this.size / 2 + bob;
+    const x = ((s.x + 1) / 2) * this.vw - this.boxW / 2;
+    const y = ((1 - s.y) / 2) * this.vh - this.boxH / 2 + bob;
     this.el.style.opacity = alpha.toFixed(3);
-    this.el.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0) scale(${fit.toFixed(4)}) rotate(${(s.rotZ * 57.3).toFixed(2)}deg)`;
+    this.el.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0) scale(${fit.toFixed(4)}) rotate(${(s.rotZ * 40).toFixed(2)}deg)`;
 
-    // Tilt: pointer + a slow sway driven by the story's rotY (a flat-layered
-    // flower never turns fully edge-on, so rotY becomes a sway, not a spin)
-    const deg = 57.2958;
-    const max = TULIPAN.inclinacionMouse * deg;
-    const sway = Math.sin(s.rotY) * 24 + Math.sin(this.time * 0.7) * 6 + this.hover.look * -16;
-    const rx = this.pointer.y * max * 0.6 + 8 + s.rotX * deg;
-    const ry = this.pointer.x * max + sway;
-    this.tiltEl.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+    // Tilt: small angles only, it is a photograph (a gentle lean, never a card flip)
+    const max = TULIPAN.inclinacionMouse * 30;
+    const sway = Math.sin(s.rotY) * 8 + Math.sin(this.time * 0.7) * 3 + this.hover.look * -8;
+    this.tiltEl.style.transform = `rotateX(${(this.pointer.y * max * 0.5 + s.rotX * 20).toFixed(2)}deg) rotateY(${(this.pointer.x * max + sway).toFixed(2)}deg)`;
 
-    // Open: each petal rotates out from its base
-    const open = gsap.utils.clamp(0, 1.2, s.open + this.hover.open);
-    const breathe = Math.sin(this.time * 1.3) * 1.5;
-    for (const p of this.petals) {
-      let a = 0;
-      let sc = 1;
-      if (p.ring === "outer") a = p.side * (-20 + 46 * open + breathe);
-      else if (p.ring === "mid") a = p.side * (-11 + 26 * open + breathe * 0.6);
-      else sc = 0.92 + 0.12 * open;
-      p.el.style.transform = `translateZ(${p.z}px) rotate(${a.toFixed(2)}deg) scale(${sc.toFixed(3)})`;
+    // Bloom: the scroll (and the CTA hover) choose the frame. At rest nothing redraws.
+    const open = gsap.utils.clamp(0, 1, s.open + this.hover.open);
+    const f = Math.round(open * (SHEET.frames - 1) * 64) / 64;
+    if (f !== this.drawn) {
+      this.draw(f);
+      this.drawn = f;
     }
-    if (this.loose) this.loose.style.opacity = (gsap.utils.clamp(0, 1, s.loose) * (this.mobile ? 0 : 1)).toFixed(3);
   }
 }

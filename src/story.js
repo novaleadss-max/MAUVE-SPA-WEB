@@ -76,7 +76,7 @@ export function initStory({ tulip }) {
   tl.to(".hero__figure", { scale: mobile ? 0.92 : 0.86, xPercent: mobile ? -50 : -62, yPercent: 2, ease: "m-soft", duration: L.c1 * 0.7 }, c1);
   tl.to([".hero__lede", ".hero__cta", ".hero__cue"], { autoAlpha: 0, y: -20, ease: "m-out", duration: L.c1 * 0.18, stagger: 0.02 }, c1);
   rise(phrase, c1 + L.c1 * 0.24, L.c1 * 0.22, 0.03);
-  tl.to(T, { open: 1, rotY: Math.PI * 1.25, x: mobile ? 0.52 : 0.42, y: mobile ? -0.6 : 0.16, scale: mobile ? 0.28 : 0.4, loose: 0.3, ease: "m-soft", duration: L.c1 * 0.7 }, c1);
+  tl.to(T, { open: 1, rotY: Math.PI * 1.25, x: mobile ? 0.34 : 0.42, y: mobile ? -0.62 : 0.16, scale: mobile ? 0.26 : 0.4, loose: 0.3, ease: "m-soft", duration: L.c1 * 0.7 }, c1);
 
   // 1 → 2 · cortina. El 2 sube como una hoja; su contenido viene a contramano
   // (así parece una máscara que se abre) y el 1 se hunde y se oscurece.
