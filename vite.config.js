@@ -70,6 +70,36 @@ const blocks = {
     ).join(""),
 };
 
+/* Minimal landing (rama "minimal") */
+Object.assign(blocks, {
+  HERO_LIST: () =>
+    SERVICES.map((s, i) => `<li${i === 0 ? ' class="is-on"' : ""}><a href="#servicio-${s.id}">${esc(s.title)}</a></li>`).join(""),
+
+  RITUAL: () =>
+    SERVICES.map(
+      (s, i) => `
+      <article class="ritual__item" id="servicio-${s.id}" data-index="${i}">
+        <p class="ritual__num">${String(i + 1).padStart(2, "0")}</p>
+        <h3 class="ritual__title">${esc(s.title)}</h3>
+        <p class="ritual__line">${esc(s.line)}</p>
+        <div class="ritual__pic-mobile">${pic(s.img, { alt: s.alt, sizes: "90vw" })}</div>
+        <a class="u-link" href="${wa(`Hola Mauve, quiero información de ${s.title.toLowerCase()}.`)}" target="_blank" rel="noopener">Pregunta precio y cita <span aria-hidden="true">→</span></a>
+      </article>`,
+    ).join(""),
+
+  RITUAL_PICS: () =>
+    SERVICES.map((s, i) => `<div class="ritual__pic${i === 0 ? " is-on" : ""}" data-index="${i}">${pic(s.img, { alt: "", sizes: "(max-width: 900px) 0px, 42vw" })}</div>`).join(""),
+
+  STRIP: () =>
+    GALLERY.map(
+      (g, i) => `
+      <figure class="strip__item strip__item--${i % 3}">
+        <div class="strip__pic">${pic(g.img, { alt: `${g.title}: ${g.desc}`, sizes: "(max-width: 900px) 70vw, 26vw" })}</div>
+        <figcaption><span class="strip__title">${esc(g.title)}</span><span class="strip__svc">${esc(g.service)}</span></figcaption>
+      </figure>`,
+    ).join(""),
+});
+
 const tokens = {
   WA_MAIN: () => wa("Hola Mauve, quiero agendar una cita."),
   WA_DISPLAY: () => BRAND.whatsappDisplay,
@@ -96,6 +126,10 @@ function mauveContent() {
     transformIndexHtml(html) {
       return html
         .replace(/<!--\s*BLOCK:(\w+)\s*-->/g, (_, k) => blocks[k]())
+        // <!--PIC name | alt | sizes | class | eager-->
+        .replace(/<!--\s*PIC\s+([^|>]+)\|([^|>]*)\|([^|>]*)\|([^|>]*?)(\|\s*eager)?\s*-->/g, (_, name, alt, sizes, cls, eager) =>
+          pic(name.trim(), { alt: alt.trim(), sizes: sizes.trim(), cls: cls.trim(), eager: !!eager }),
+        )
         .replace(/%%(\w+)%%/g, (_, k) => tokens[k]());
     },
   };

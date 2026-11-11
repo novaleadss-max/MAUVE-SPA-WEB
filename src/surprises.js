@@ -93,7 +93,7 @@ export function initPetalRain() {
   document.querySelectorAll(".js-logo").forEach((logo) =>
     logo.addEventListener("click", () => {
       if (env.reduced) return;
-      const r = logo.querySelector(".brand__mark").getBoundingClientRect();
+      const r = (logo.querySelector(".brand__mark") || logo).getBoundingClientRect();
       burst(r.left + r.width / 2, r.top + r.height / 2);
     }),
   );

@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Mauve · Salón, uñas y spa en Puebla</title>
   <meta name="description" content="Salón de belleza, uñas y spa en Atlixcáyotl, Puebla: balayage, corte, peinado, maquillaje, uñas, faciales, masajes y pedicure. Agenda por WhatsApp." />
-  <meta name="theme-color" content="#C98086" />
+  <meta name="theme-color" content="#F0EEE9" />
   <meta name="color-scheme" content="light" />
   <link rel="canonical" href="%%URL%%" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-  <!-- Open Graph / redes -->
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="es_MX" />
   <meta property="og:site_name" content="Mauve" />
@@ -21,11 +20,11 @@
   <meta property="og:image" content="%%URL%%og.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Modelo maquillada en Mauve sobre fondo rosa, con el nombre Mauve" />
+  <meta property="og:image:alt" content="Mauve, salón, uñas y spa en Puebla" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="%%URL%%og.jpg" />
 
-  <link rel="preload" as="image" href="/img/retrato-recorte-800.avif" type="image/avif" imagesrcset="/img/retrato-recorte-480.avif 480w, /img/retrato-recorte-800.avif 800w, /img/retrato-recorte-1122.avif 1122w" imagesizes="(max-width: 760px) 100vw, 60vw" />
+  <link rel="preload" as="image" type="image/avif" imagesrcset="/img/retrato-nuevo-480.avif 480w, /img/retrato-nuevo-800.avif 800w, /img/retrato-nuevo-1122.avif 1122w" imagesizes="(max-width: 900px) 92vw, 36vw" />
 
   <script type="application/ld+json">
   {
@@ -48,261 +47,134 @@
   }
   </script>
   <script>
-    // Before first paint: pick the layout now so nothing jumps when the JS arrives
     (function (h) {
       h.classList.replace("no-js", "js");
-      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) h.classList.add("is-story", "js-gallery");
-      // Safety net: if the script never boots, fall back to the plain stacked page
-      setTimeout(function () {
-        if (!h.classList.contains("is-booted")) h.classList.remove("is-story", "js-gallery", "js");
-      }, 8000);
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) h.classList.add("motion");
+      // Safety net: if the script never boots, show everything as a plain page
+      setTimeout(function () { if (!h.classList.contains("is-booted")) h.classList.remove("motion", "js"); }, 6000);
     })(document.documentElement);
   </script>
 </head>
 
 <body>
-  <!-- Marca reutilizable: tulipán del logo de Mauve -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-    <defs>
-      <symbol id="tulip" viewBox="0 0 120 100">
-        <path d="M12 90 A48 48 0 0 1 108 90" fill="none" stroke-width="4.5" stroke-linecap="round" style="stroke: var(--t-arch, currentColor)" />
-        <path style="fill: var(--t-outer, #7d78b8)" d="M60 88 C43 89 31 79 26 62 C39 66 52 75 60 88Z" />
-        <path style="fill: var(--t-outer, #7d78b8)" d="M60 88 C77 89 89 79 94 62 C81 66 68 75 60 88Z" />
-        <path style="fill: var(--t-mid, #b3b0dd)" d="M60 87 C46 82 39 68 41 50 C51 57 57 70 60 87Z" />
-        <path style="fill: var(--t-mid, #b3b0dd)" d="M60 87 C74 82 81 68 79 50 C69 57 63 70 60 87Z" />
-        <path style="fill: var(--t-center, #9a96cf)" d="M60 42 C70 55 72 72 60 87 C48 72 50 55 60 42Z" />
-      </symbol>
-    </defs>
-  </svg>
-
   <a class="skip" href="#contenido">Saltar al contenido</a>
 
-  <!-- PRELOADER: el tulipán se llena con la carga y se abre como máscara -->
-  <div class="preloader" aria-hidden="true">
-    <svg class="preloader__svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <mask id="pre-mask" maskUnits="userSpaceOnUse" x="-50" y="-50" width="200" height="200">
-          <rect x="-50" y="-50" width="200" height="200" fill="#fff" />
-          <g class="preloader__hole">
-            <path transform="translate(40.4 39.6) scale(.16)" d="M60 88 C43 89 31 79 26 62 C39 66 52 75 60 88Z M60 88 C77 89 89 79 94 62 C81 66 68 75 60 88Z M60 87 C46 82 39 68 41 50 C51 57 57 70 60 87Z M60 87 C74 82 81 68 79 50 C69 57 63 70 60 87Z M60 42 C70 55 72 72 60 87 C48 72 50 55 60 42Z" fill="#000" />
-          </g>
-        </mask>
-      </defs>
-      <rect class="preloader__bg" x="-50" y="-50" width="200" height="200" mask="url(#pre-mask)" />
-    </svg>
-    <div class="preloader__mark">
-      <svg class="preloader__tulip" viewBox="0 0 120 100">
-          <path class="t-arch" d="M12 90 A48 48 0 0 1 108 90" />
-          <path class="t-outer" d="M60 88 C43 89 31 79 26 62 C39 66 52 75 60 88Z" />
-          <path class="t-outer" d="M60 88 C77 89 89 79 94 62 C81 66 68 75 60 88Z" />
-          <path class="t-mid" d="M60 87 C46 82 39 68 41 50 C51 57 57 70 60 87Z" />
-          <path class="t-mid" d="M60 87 C74 82 81 68 79 50 C69 57 63 70 60 87Z" />
-          <path class="t-center" d="M60 42 C70 55 72 72 60 87 C48 72 50 55 60 42Z" />
-        </svg>
-      <svg class="preloader__tulip preloader__tulip--fill" viewBox="0 0 120 100">
-          <path class="t-arch" d="M12 90 A48 48 0 0 1 108 90" />
-          <path class="t-outer" d="M60 88 C43 89 31 79 26 62 C39 66 52 75 60 88Z" />
-          <path class="t-outer" d="M60 88 C77 89 89 79 94 62 C81 66 68 75 60 88Z" />
-          <path class="t-mid" d="M60 87 C46 82 39 68 41 50 C51 57 57 70 60 87Z" />
-          <path class="t-mid" d="M60 87 C74 82 81 68 79 50 C69 57 63 70 60 87Z" />
-          <path class="t-center" d="M60 42 C70 55 72 72 60 87 C48 72 50 55 60 42Z" />
-        </svg>
-    </div>
-    <p class="preloader__count"><span class="preloader__num">0</span></p>
-  </div>
-
-  <!-- CABECERA -->
-  <header class="site-header" data-theme="ink">
-    <a class="brand js-logo" href="#inicio" aria-label="Mauve, ir al inicio">
-      <svg class="brand__mark" viewBox="0 0 120 100" aria-hidden="true"><use href="#tulip" /></svg>
-      <span class="brand__word" translate="no">Mauve</span>
-    </a>
-    <nav class="site-nav" aria-label="Principal">
-      <a class="link-line" href="#servicios">Servicios</a>
-      <a class="link-line" href="#galeria">Galería</a>
-      <a class="link-line" href="#visitanos">Visítanos</a>
+  <header class="head">
+    <a class="head__brand js-logo" href="#inicio" aria-label="Mauve, ir al inicio" translate="no">Mauve<span class="head__dot">.</span></a>
+    <nav class="head__nav" aria-label="Principal">
+      <a class="u-link" href="#ritual">Servicios</a>
+      <a class="u-link" href="#sesion">La sesión</a>
+      <a class="u-link" href="#casa">Nuestra casa</a>
+      <a class="u-link" href="#cita">Visítanos</a>
     </nav>
-    <a class="btn btn--small js-magnetic" href="%%WA_MAIN%%" target="_blank" rel="noopener"><span>Agendar</span></a>
+    <a class="head__cta" href="%%WA_MAIN%%" target="_blank" rel="noopener"><span>Agendar</span><span class="head__plus" aria-hidden="true">+</span></a>
   </header>
 
-  <!-- Índice lateral de capítulos -->
-  <nav class="rail" aria-label="Capítulos">
-    <ol class="rail__list">
-      <li><a href="#inicio" data-chapter="inicio" aria-label="Inicio"><span class="rail__label" aria-hidden="true">Inicio</span></a></li>
-      <li><a href="#color" data-chapter="color" aria-label="El color"><span class="rail__label" aria-hidden="true">El color</span></a></li>
-      <li><a href="#detalle" data-chapter="detalle" aria-label="El detalle"><span class="rail__label" aria-hidden="true">El detalle</span></a></li>
-      <li><a href="#remate" data-chapter="remate" aria-label="El remate"><span class="rail__label" aria-hidden="true">El remate</span></a></li>
-      <li><a href="#servicios" data-chapter="servicios" aria-label="Servicios"><span class="rail__label" aria-hidden="true">Servicios</span></a></li>
-      <li><a href="#galeria" data-chapter="galeria" aria-label="La sesión"><span class="rail__label" aria-hidden="true">La sesión</span></a></li>
-      <li><a href="#historia" data-chapter="historia" aria-label="Nuestra casa"><span class="rail__label" aria-hidden="true">Nuestra casa</span></a></li>
-      <li><a href="#visitanos" data-chapter="visitanos" aria-label="Tu cita"><span class="rail__label" aria-hidden="true">Tu cita</span></a></li>
-    </ol>
-  </nav>
-
-  <div class="bloom" aria-hidden="true">
-    <div class="bloom__shadow"></div>
-    <div class="bloom__tilt"><canvas class="bloom__canvas"></canvas></div>
-  </div>
-
   <main id="contenido">
-    <!-- ═══ SCROLLYTELLING: capítulos 1 a 5 viven en un escenario fijado ═══ -->
-    <section class="story" aria-label="Historia de Mauve">
 
-      <!-- CAPÍTULO 1 · INICIO -->
-      <div class="chapter ch1" id="inicio" data-chapter="inicio" data-theme="ink">
-        <h1 class="hero__title"><span class="hero__word" translate="no">Mauve</span><span class="sr-only">: salón, uñas y spa en Puebla</span></h1>
-        <div class="hero__figure">%%PIC_HERO%%</div>
-        <p class="hero__lede">Salón, uñas y spa <br />en Puebla.</p>
-        <a class="btn hero__cta js-magnetic" href="%%WA_MAIN%%" target="_blank" rel="noopener"><span>Agenda por WhatsApp</span></a>
-        <p class="hero__cue" aria-hidden="true"><span class="hero__cue-dot"></span>Desliza</p>
-        <p class="statement ch1__phrase">Entras como eres. <br />Sales brillando.</p>
-        <div class="ch1__shade" aria-hidden="true"></div>
+    <!-- 01 · LLEGAS ─────────────────────────────────────────────────── -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <h1 class="hero__title" id="hero-title">
+        <span class="line">Entras como eres.</span>
+        <span class="line">Sales <em>brillando.</em></span>
+      </h1>
+
+      <div class="hero__intro">
+        <p class="chap"><span class="chap__rule" aria-hidden="true"></span>01</p>
+        <p class="hero__text">Mauve es salón, uñas y spa en Puebla. Un lugar para sentirte bella, cuidada y querida.</p>
+        <a class="u-link u-link--caps" href="%%WA_MAIN%%" target="_blank" rel="noopener">Agenda tu cita <span aria-hidden="true">→</span></a>
       </div>
 
-      <!-- CAPÍTULO 2 · EL COLOR -->
-      <div class="chapter ch2" id="color" data-chapter="color" data-theme="ink">
-        <div class="ch2__inner">
-          <div class="ch2__copy">
-            <h2 class="display ch2__title">Tu color, <br />a tu manera.</h2>
-            <p class="ch2__look" aria-live="polite"><span class="ch2__look-track"><span>Balayage</span><span>Ondas</span><span>Capas</span></span></p>
-            <p class="ch2__sub">Color, corte y peinado. <br />Seis looks de una misma sesión.</p>
-          </div>
-          <div class="hair">
-            <!-- BLOCK:HAIR -->
-            <div class="hair__meter" aria-hidden="true"><span class="hair__meter-fill"></span></div>
-          </div>
-        </div>
+      <figure class="hero__main"><div class="frame"><!--PIC retrato-nuevo | Modelo maquillada y peinada en Mauve, sonriendo, sobre el fondo rosa de la sesión | (max-width: 900px) 92vw, 36vw | | eager--></div></figure>
+      <figure class="hero__small"><div class="frame"><!--PIC unas-perla | Uñas almendra cortas con efecto perla | (max-width: 900px) 44vw, 15vw | --></div></figure>
+
+      <div class="hero__meta">
+        <span>Puebla, México</span>
+        <span class="hero__meta-sep" aria-hidden="true"></span>
+        <span>Reserva Territorial Atlixcáyotl</span>
       </div>
 
-      <!-- CAPÍTULO 3 · EL DETALLE -->
-      <div class="chapter ch3" id="detalle" data-chapter="detalle" data-theme="ink">
-        <div class="ch3__tint" aria-hidden="true"></div>
-        <h2 class="display ch3__title">Uña por uña, <br />a mano.</h2>
-        <div class="nails" aria-label="Diseños de uñas">
-          <!-- BLOCK:NAILS -->
-        </div>
-        <p class="ch3__sub">Gel, estilo francés y arte pintado a mano.</p>
+      <ul class="hero__list" aria-label="Servicios"><!-- BLOCK:HERO_LIST --></ul>
+
+      <a class="seal js-magnetic" href="%%WA_MAIN%%" target="_blank" rel="noopener" aria-label="Agenda por WhatsApp">
+        <svg class="seal__ring" viewBox="0 0 120 120" aria-hidden="true">
+          <defs><path id="seal-path" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0" /></defs>
+          <text><textPath href="#seal-path" startOffset="0">Salón · Uñas · Spa · Puebla · Salón · Uñas · Spa · Puebla ·</textPath></text>
+        </svg>
+        <span class="seal__m" translate="no">M.</span>
+      </a>
+
+      <p class="hero__side" aria-hidden="true">Salón <span>/</span> Uñas <span>/</span> Spa</p>
+    </section>
+
+    <!-- 02 · NUESTRA CASA ───────────────────────────────────────────── -->
+    <section class="casa" id="casa" aria-labelledby="casa-title">
+      <p class="chap"><span class="chap__rule" aria-hidden="true"></span>02 <span class="chap__name" id="casa-title">Nuestra casa</span></p>
+      <p class="casa__text js-fill">Mauve nació de una idea: un lugar donde cualquier persona se sienta bella, cuidada y querida. Llegues como llegues, con prisa, cansada o con ganas de consentirte, aquí sales radiante.</p>
+      <figure class="casa__pic casa__pic--a"><div class="frame"><!--PIC salon-muro | El muro de Mauve con su logo, en el salón | (max-width: 900px) 40vw, 18vw | --></div></figure>
+      <figure class="casa__pic casa__pic--b"><div class="frame"><!--PIC maquillaje-natural | Maquillaje natural con piel luminosa | (max-width: 900px) 34vw, 14vw | --></div></figure>
+    </section>
+
+    <!-- 03 · EL RITUAL (servicios) ──────────────────────────────────── -->
+    <section class="ritual" id="ritual" aria-labelledby="ritual-title">
+      <div class="ritual__head">
+        <p class="chap"><span class="chap__rule" aria-hidden="true"></span>03 <span class="chap__name">El ritual</span></p>
+        <h2 class="h2" id="ritual-title">Todo en un <em>mismo lugar.</em></h2>
+        <p class="ritual__sub">Precios y citas por WhatsApp.</p>
       </div>
+      <div class="ritual__stage" aria-hidden="true"><!-- BLOCK:RITUAL_PICS --></div>
+      <div class="ritual__list"><!-- BLOCK:RITUAL --></div>
+    </section>
 
-      <!-- CAPÍTULO 4 · EL REMATE -->
-      <div class="chapter ch4" id="remate" data-chapter="remate" data-theme="light">
-        <div class="finale__window">%%PIC_SALON%%</div>
-        <div class="ch4__panel">
-          <p class="statement ch4__phrase">Lista <br />para salir.</p>
-        </div>
-        <div class="curtain" aria-hidden="true"></div>
-        <div class="ch4__brand">
-          <p class="ch4__name" aria-hidden="true" translate="no">Mauve</p>
-          <p class="ch4__tag">Salón · Uñas · Spa</p>
-        </div>
-      </div>
-
-      <!-- CAPÍTULO 5 · SERVICIOS -->
-      <div class="chapter ch5" id="servicios" data-chapter="servicios" data-theme="light">
-
-        <div class="svc-track">
-  <div class="ch5__head">
-          <h2 class="display ch5__title">Servicios</h2>
-          <p class="ch5__sub">Todo en un mismo lugar. <br />Precios y citas por WhatsApp.</p>
-        </div>
-          <!-- BLOCK:SERVICES -->
-          <div class="svc-end">
-            <p class="svc-end__text">¿No ves lo que buscas?</p>
-            <a class="btn btn--light js-magnetic" href="%%WA_MAIN%%" target="_blank" rel="noopener"><span>Pregúntanos</span></a>
-          </div>
-        </div>
+    <!-- 04 · LA FLOR ────────────────────────────────────────────────── -->
+    <section class="flor" id="flor" aria-labelledby="flor-title">
+      <div class="flor__pin">
+        <p class="chap"><span class="chap__rule" aria-hidden="true"></span>04 <span class="chap__name">La flor</span></p>
+        <h2 class="h2 flor__title" id="flor-title"><span class="line">Sin prisa,</span><span class="line">a tu <em>tiempo.</em></span></h2>
+        <div class="flor__bloom" aria-hidden="true"><canvas class="flor__canvas"></canvas></div>
+        <p class="flor__note">El cuidado empieza en el detalle.</p>
       </div>
     </section>
 
-    <!-- ═══ GALERÍA INFINITA (movimiento basado en Codrops / Surya Aditya) ═══ -->
-    <section class="gallery-sec" id="galeria" data-chapter="galeria" data-theme="light" aria-labelledby="galeria-title">
-      <div class="gallery-sec__head">
-        <h2 class="display gallery-sec__title" id="galeria-title">La sesión</h2>
-        <p class="gallery-sec__sub">Desliza para recorrerla. <br />Toca una foto para verla completa.</p>
-        <button class="btn btn--light btn--ghost js-magnetic js-endless" type="button"><span>Verla sin fin</span></button>
-      </div>
-      <div class="gallery">
-        <!-- BLOCK:GALLERY -->
-      </div>
-    </section>
-
-    <!-- Marquee -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee__track">
-        <span class="marquee__item">Cabello</span><svg class="marquee__mark"><use href="#tulip" /></svg>
-        <span class="marquee__item">Maquillaje</span><svg class="marquee__mark"><use href="#tulip" /></svg>
-        <span class="marquee__item">Uñas</span><svg class="marquee__mark"><use href="#tulip" /></svg>
-        <span class="marquee__item">Faciales</span><svg class="marquee__mark"><use href="#tulip" /></svg>
-        <span class="marquee__item">Masajes</span><svg class="marquee__mark"><use href="#tulip" /></svg>
-        <span class="marquee__item">Pedicure</span><svg class="marquee__mark"><use href="#tulip" /></svg>
-        <span class="marquee__item">Mauve</span><svg class="marquee__mark"><use href="#tulip" /></svg>
-      </div>
-    </div>
-
-    <!-- CAPÍTULO 6 · NUESTRA CASA -->
-    <section class="history" id="historia" data-chapter="historia" data-theme="ink" aria-labelledby="historia-title">
-      <div class="history__pin">
-        <h2 class="history__title" id="historia-title">Nuestra casa</h2>
-        <p class="history__text js-fill">Mauve nació de una idea: un lugar donde cualquier persona se sienta bella, cuidada y querida. Llegues como llegues, con prisa, cansada o con ganas de consentirte, aquí sales radiante.</p>
-        <div class="history__pic history__pic--a" data-speed="-0.35">%%PIC_STORY_A%%</div>
-        <div class="history__pic history__pic--b" data-speed="0.25">%%PIC_STORY_B%%</div>
-        <div class="history__pic history__pic--c" data-speed="-0.6">%%PIC_STORY_C%%</div>
+    <!-- 05 · LA SESIÓN ──────────────────────────────────────────────── -->
+    <section class="sesion" id="sesion" aria-labelledby="sesion-title">
+      <div class="sesion__pin">
+        <div class="sesion__head">
+          <p class="chap"><span class="chap__rule" aria-hidden="true"></span>05 <span class="chap__name">La sesión</span></p>
+          <h2 class="h2" id="sesion-title">Hecho <em>en Mauve.</em></h2>
+        </div>
+        <div class="strip"><!-- BLOCK:STRIP --></div>
       </div>
     </section>
 
-    <!-- CAPÍTULO 7 · TU CITA -->
-    <section class="cta" id="visitanos" data-chapter="visitanos" data-theme="ink" aria-labelledby="cta-title">
-      <h2 class="display cta__title" id="cta-title">Tu cita, <br />a un mensaje.</h2>
-      <div class="cta__action">
-        <a class="cta__button js-magnetic js-bloom" href="%%WA_MAIN%%" target="_blank" rel="noopener">
-          <span class="cta__button-text">Agenda por WhatsApp</span>
-          <span class="cta__button-num">%%WA_DISPLAY%%</span>
-        </a>
-      </div>
-      <dl class="cta__info">
-        <div><dt>Dónde</dt><dd><a class="link-line" href="%%MAPS%%" target="_blank" rel="noopener">%%STREET%%, %%AREA%% <br />%%CITY%%</a></dd></div>
-        <div><dt>WhatsApp</dt><dd><a class="link-line" href="%%WA_MAIN%%" target="_blank" rel="noopener">%%WA_DISPLAY%%</a></dd></div>
-        <div><dt>Instagram</dt><dd><a class="link-line" href="%%IG%%" target="_blank" rel="noopener">%%IG_HANDLE%%</a></dd></div>
+    <!-- 06 · TU CITA ────────────────────────────────────────────────── -->
+    <section class="cita" id="cita" aria-labelledby="cita-title">
+      <p class="chap"><span class="chap__rule" aria-hidden="true"></span>06 <span class="chap__name">Tu cita</span></p>
+      <h2 class="cita__title" id="cita-title"><span class="line">Tu cita,</span><span class="line"><em>a un mensaje.</em></span></h2>
+      <a class="btn js-magnetic" href="%%WA_MAIN%%" target="_blank" rel="noopener"><span>Agenda por WhatsApp</span><span class="btn__arrow" aria-hidden="true">→</span></a>
+      <dl class="cita__info">
+        <div><dt>Dónde</dt><dd><a class="u-link" href="%%MAPS%%" target="_blank" rel="noopener">%%STREET%%, %%AREA%%<br />%%CITY%%</a></dd></div>
+        <div><dt>WhatsApp</dt><dd><a class="u-link" href="%%WA_MAIN%%" target="_blank" rel="noopener">%%WA_DISPLAY%%</a></dd></div>
+        <div><dt>Instagram</dt><dd><a class="u-link" href="%%IG%%" target="_blank" rel="noopener">%%IG_HANDLE%%</a></dd></div>
         <div><dt>Horario</dt><dd>%%HOURS%%</dd></div>
       </dl>
-      <div class="cta__pic">%%PIC_CTA%%</div>
     </section>
   </main>
 
-  <footer class="footer" data-theme="light">
-    <div class="footer__top">
-      <p class="footer__line">Salón · Uñas · Spa <br />Puebla, México</p>
-      <nav class="footer__nav" aria-label="Pie de página">
-        <a class="link-line" href="%%WA_MAIN%%" target="_blank" rel="noopener">WhatsApp</a>
-        <a class="link-line" href="%%IG%%" target="_blank" rel="noopener">Instagram</a>
-        <a class="link-line" href="%%MAPS%%" target="_blank" rel="noopener">Cómo llegar</a>
-        <button class="link-line js-endless" type="button">La sesión sin fin</button>
-        <a class="link-line js-top" href="#inicio">Volver arriba</a>
+  <footer class="foot">
+    <p class="foot__word" aria-hidden="true" translate="no">Mauve<span class="head__dot">.</span></p>
+    <div class="foot__row">
+      <p>© %%YEAR%% Mauve Salón · Uñas · Spa</p>
+      <nav class="foot__nav" aria-label="Pie de página">
+        <a class="u-link" href="%%WA_MAIN%%" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="u-link" href="%%IG%%" target="_blank" rel="noopener">Instagram</a>
+        <a class="u-link" href="%%MAPS%%" target="_blank" rel="noopener">Cómo llegar</a>
+        <a class="u-link" href="#inicio">Volver arriba</a>
       </nav>
     </div>
-    <p class="footer__word" aria-hidden="true" translate="no">Mauve</p>
-    <p class="footer__legal">© %%YEAR%% Mauve Salón · Uñas · Spa. Toca el tulipán del logo.</p>
   </footer>
 
-  <!-- Preview de la galería (Flip) -->
-  <div class="content" role="dialog" aria-modal="true" aria-labelledby="content-title" hidden>
-    <figure class="content__preview-img"><img alt="" /></figure>
-    <div class="content__group-list">
-      <button class="content__back" type="button" aria-label="Cerrar foto (Esc)"><span>Cerrar</span></button>
-      <!-- BLOCK:GALLERY_CONTENT -->
-    </div>
-  </div>
-
-  <!-- Modo "sin fin": la galería a pantalla completa con rueda y touch -->
-  <div class="endless" role="dialog" aria-modal="true" aria-label="La sesión sin fin" hidden>
-    <button class="endless__close" type="button"><span>Salir</span></button>
-    <p class="endless__hint">Rueda o desliza. Esc para salir.</p>
-    <div class="endless__gallery gallery"></div>
-  </div>
-
   <canvas class="petal-rain" aria-hidden="true"></canvas>
-  <div class="cursor" aria-hidden="true"><div class="cursor__ring"><span class="cursor__label"></span></div><div class="cursor__dot"></div></div>
-
-  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/minimal.js"></script>
 </body>
 </html>
