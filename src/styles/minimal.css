@@ -162,8 +162,11 @@ h1, h2, h3 { text-wrap: balance; }
 .ritual { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding: 0 var(--pad) clamp(100px, 12vw, 200px); }
 .ritual__head { grid-column: 1 / 13; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 28px; align-items: end; padding-bottom: clamp(56px, 7vw, 120px); border-bottom: 1px solid var(--line); margin-bottom: clamp(40px, 5vw, 80px); }
 .ritual__head .chap { grid-column: 1 / 13; }
-.ritual__head .h2 { grid-column: 1 / 9; }
-.ritual__sub { grid-column: 10 / 13; color: var(--ink-2); justify-self: end; }
+.ritual__head .h2 { grid-column: 1 / 8; grid-row: 2; }
+.ritual__sub { grid-column: 1 / 6; grid-row: 3; color: var(--ink-2); }
+.ritual__ph { aspect-ratio: 3 / 4; overflow: clip; grid-row: 2 / 4; align-self: end; }
+.ritual__ph--a { grid-column: 9 / 11; }
+.ritual__ph--b { grid-column: 11 / 13; margin-bottom: clamp(20px, 3vw, 48px); }
 .ritual__stage { grid-column: 1 / 6; position: sticky; top: calc(var(--head-h) + 4svh); height: calc(100svh - var(--head-h) - 10svh); align-self: start; }
 .ritual__pic { position: absolute; inset: 0; overflow: clip; background: var(--bone-2); opacity: 0; transform: scale(1.04); transition: opacity 700ms var(--ease-out), transform 1100ms var(--ease-out); }
 .ritual__pic.is-on { opacity: 1; transform: none; }
@@ -200,7 +203,10 @@ h1, h2, h3 { text-wrap: balance; }
 /* 06 · Tu cita ------------------------------------------------------------ */
 .cita { padding: clamp(120px, 14vw, 220px) var(--pad) clamp(80px, 9vw, 140px); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: clamp(36px, 4vw, 64px); }
 .cita .chap { grid-column: 1 / 13; }
-.cita__title { grid-column: 1 / 10; font-family: var(--serif); font-weight: 360; font-size: clamp(56px, 8vw, 148px); line-height: 0.94; letter-spacing: -0.025em; }
+.cita__pic { overflow: clip; }
+.cita__pic--a { grid-column: 9 / 13; grid-row: 2 / 5; aspect-ratio: 3 / 4; align-self: start; margin-top: calc(clamp(36px, 4vw, 64px) * -1); }
+.cita__pic--b { grid-column: 7 / 9; grid-row: 4; aspect-ratio: 4 / 5; align-self: end; justify-self: end; width: 80%; margin-bottom: 12px; }
+.cita__title { grid-column: 1 / 9; font-family: var(--serif); font-weight: 360; font-size: clamp(56px, 8vw, 148px); line-height: 0.94; letter-spacing: -0.025em; }
 .btn {
   grid-column: 1 / 13; justify-self: start;
   display: inline-flex; align-items: center; gap: 18px;
@@ -218,7 +224,7 @@ h1, h2, h3 { text-wrap: balance; }
 }
 .btn:active { transform: scale(0.97); }
 .btn:focus-visible::before { transform: none; }
-.cita__info { grid-column: 1 / 13; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 24px; border-top: 1px solid var(--line); padding-top: 28px; margin-top: clamp(20px, 3vw, 48px); }
+.cita__info { grid-column: 1 / 13; grid-row: 5; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 24px; border-top: 1px solid var(--line); padding-top: 28px; margin-top: clamp(20px, 3vw, 48px); }
 .cita__info dt { color: var(--ink-2); margin-bottom: 12px; }
 .cita__info dd { font-size: clamp(16px, 1.15vw, 19px); line-height: 1.45; }
 
@@ -257,7 +263,9 @@ h1, h2, h3 { text-wrap: balance; }
   .casa__pic--b { width: 80%; justify-self: end; margin-top: 30%; }
   .ritual { grid-template-columns: minmax(0, 1fr); }
   .ritual__head { grid-column: 1; grid-template-columns: minmax(0, 1fr); }
-  .ritual__head .chap, .ritual__head .h2, .ritual__sub { grid-column: 1; justify-self: start; }
+  .ritual__head .chap, .ritual__head .h2, .ritual__sub { grid-column: 1; grid-row: auto; justify-self: start; }
+  .ritual__ph { grid-row: auto; grid-column: 1; width: 46%; }
+  .ritual__ph--b { justify-self: end; margin-top: -48%; margin-bottom: 0; }
   .ritual__stage { display: none; }
   .ritual__list { grid-column: 1; }
   .ritual__item { min-height: 0; padding: 40px 0; }
@@ -273,6 +281,9 @@ h1, h2, h3 { text-wrap: balance; }
   .strip__item--2 .strip__pic { height: 44svh; }
   .cita { grid-template-columns: minmax(0, 1fr); }
   .cita .chap, .cita__title, .btn, .cita__info { grid-column: 1; }
+  .cita__pic--a { grid-column: 1; grid-row: auto; margin-top: 0; aspect-ratio: 4 / 5; }
+  .cita__pic--b { display: none; } /* en celular sólo la foto grande: la chica se ve mejor sola */
+  .cita__info { margin-top: 28px; }
   .cita__title { font-size: clamp(52px, 15vw, 88px); }
   .cita__info { grid-template-columns: 1fr 1fr; row-gap: 28px; }
   .foot__row { flex-direction: column; }
