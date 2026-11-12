@@ -99,7 +99,7 @@ h1, h2, h3 { text-wrap: balance; }
 }
 .head.is-hidden { transform: translateY(-100%); }
 .head__brand { font-family: var(--serif); font-size: clamp(26px, 2.1vw, 34px); font-weight: 420; letter-spacing: -0.02em; justify-self: start; }
-.head__dot { color: var(--mauve); }
+.head__dot { color: var(--ink); }
 .head__nav { display: flex; gap: clamp(24px, 3.6vw, 64px); }
 .head__cta { justify-self: end; display: inline-flex; align-items: center; gap: 14px; }
 .head__plus { font-size: 18px; font-weight: 400; transition: transform 420ms var(--ease-out); }
