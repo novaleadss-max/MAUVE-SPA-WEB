@@ -127,7 +127,6 @@ export const GALLERY = [
   { img: "unas-french-nude", title: "Francés limón", service: "Uñas", desc: "Almendra nude con punta amarilla, fina y limpia.", stagger: 27, width: 14, speed: 0.85 },
   { img: "masaje-facial", title: "Masaje facial", service: "Masajes", desc: "Masaje relajante de cuello y rostro para soltar la tensión del día.", stagger: -16, width: 23, speed: 1.3 },
   { img: "capas-castano", title: "Castaño iluminado", service: "Color", desc: "Capas largas en castaño con luces doradas alrededor del rostro.", stagger: 22, width: 19, speed: 0.8 },
-  { img: "retrato-hero", title: "Ojos de día", service: "Maquillaje", desc: "Sombra en tonos tierra, pestañas definidas y labio rosado.", stagger: -26, width: 18, speed: 1.15 },
   { img: "unas-rosas", title: "Trazos a mano", service: "Uñas", desc: "Almendra larga en amarillo pastel con trazos negros pintados a mano.", stagger: 14, width: 24, speed: 0.7 },
   { img: "unas-perla", title: "Efecto perla", service: "Uñas", desc: "Almendra corta con brillo perlado que cambia con la luz.", stagger: -20, width: 17, speed: 1.25 },
   { img: "salon-muro", title: "Ondas al natural", service: "Peinado", desc: "Cabello negro con ondas suaves, frente a nuestro muro en el salón.", stagger: 20, width: 22, speed: 0.85 },
