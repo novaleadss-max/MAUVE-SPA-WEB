@@ -1,0 +1,9 @@
+{
+  // Cloudflare: publica la carpeta dist (resultado de `npm run build`) como sitio estático.
+  // "name" debe ser igual al nombre del proyecto en Cloudflare.
+  "name": "mauve-spa-web",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist"
+  }
+}
