@@ -3,8 +3,7 @@
  *
  * Poco y preciso: titulares que suben por líneas, reglas que se dibujan,
  * fotos que se revelan una vez, un texto que se llena de tinta, la imagen de
- * los servicios que cambia sola, la flor que abre con el scroll y la sesión
- * en un carril horizontal. Sólo transform y opacity mientras se hace scroll.
+ * los servicios que cambia sola y la sesión en un carril horizontal. Sólo transform y opacity mientras se hace scroll.
  */
 import "./styles/minimal.css";
 import { gsap, ScrollTrigger, env, initScroll, splitWords, scrollTo, lenis } from "./core/motion.js";
@@ -16,50 +15,9 @@ const motion = html.classList.contains("motion");
 const mobile = env.mobile;
 initScroll();
 
-/* ── Flor: hoja de 36 cuadros con transparencia (public/flor/) ──────────── */
-const SHEET = mobile
-  ? { src: "/flor/tulipan-mobile.webp", w: 380, h: 275 }
-  : { src: "/flor/tulipan-desktop.webp", w: 680, h: 492 };
-const FRAMES = 36;
-const COLS = 6;
-function flower(canvas) {
-  const ctx = canvas.getContext("2d");
-  canvas.width = SHEET.w;
-  canvas.height = SHEET.h;
-  let bmp = null;
-  let shown = -1;
-  let wanted = motion ? 0 : 1;
-  const draw = (open) => {
-    wanted = open;
-    if (!bmp) return;
-    const f = Math.round(gsap.utils.clamp(0, 1, open) * (FRAMES - 1) * 32) / 32;
-    if (f === shown) return;
-    shown = f;
-    const i = Math.floor(f), t = f - i;
-    const at = (n) => [(n % COLS) * SHEET.w, Math.floor(n / COLS) * SHEET.h];
-    ctx.clearRect(0, 0, SHEET.w, SHEET.h);
-    ctx.globalAlpha = 1;
-    ctx.drawImage(bmp, ...at(i), SHEET.w, SHEET.h, 0, 0, SHEET.w, SHEET.h);
-    if (t > 0.02 && i + 1 < FRAMES) {
-      ctx.globalAlpha = t; // blend into the next frame: no visible stepping
-      ctx.drawImage(bmp, ...at(i + 1), SHEET.w, SHEET.h, 0, 0, SHEET.w, SHEET.h);
-    }
-  };
-  const img = new Image();
-  img.decoding = "async";
-  img.src = SHEET.src;
-  img.decode().then(() => (window.createImageBitmap ? createImageBitmap(img) : img)).then((b) => {
-    bmp = b;
-    shown = -1;
-    draw(wanted);
-  }).catch(() => {});
-  return draw;
-}
-
 /* ── Arranque ─────────────────────────────────────────────────────────── */
 document.fonts.ready.then(() => {
   html.classList.add("is-booted");
-  const drawFlower = flower(document.querySelector(".flor__canvas"));
 
   initMagnetic();
   initPetalRain();
@@ -67,16 +25,12 @@ document.fonts.ready.then(() => {
   initLinks();
   initHeader();
 
-  if (!motion) {
-    drawFlower(1);
-    return;
-  }
+  if (!motion) return;
 
   intro();
   chapters();
   casa();
   ritual();
-  flor(drawFlower);
   sesion();
   cita();
   window.addEventListener("load", () => ScrollTrigger.refresh());
@@ -112,7 +66,7 @@ function chapters() {
     gsap.from(c.querySelector(".chap__rule"), { scaleX: 0, duration: 1, ease: "m-out", scrollTrigger: { trigger: c, start: "top 88%", once: true } });
     gsap.from(c, { autoAlpha: 0, y: 10, duration: 0.8, ease: "m-out", scrollTrigger: { trigger: c, start: "top 88%", once: true } });
   });
-  document.querySelectorAll(".h2:not(.flor__title), .cita__title").forEach((h) => {
+  document.querySelectorAll(".h2, .cita__title").forEach((h) => {
     const split = splitWords(h);
     gsap.from(split.words, { yPercent: 115, duration: 1.1, ease: "m-out", stagger: 0.05, scrollTrigger: { trigger: h, start: "top 85%", once: true } });
   });
@@ -151,35 +105,7 @@ function ritual() {
   });
 }
 
-/* 04: pinned; the scroll opens the flower, the words arrive with it */
-function flor(draw) {
-  const lines = document.querySelectorAll(".flor__title .line");
-  lines.forEach((l) => {
-    const mask = document.createElement("span");
-    mask.style.cssText = "display:block;overflow:clip;padding-bottom:.1em;margin-bottom:-.1em";
-    l.parentNode.insertBefore(mask, l);
-    mask.appendChild(l);
-  });
-  const state = { open: 0 };
-  const tl = gsap.timeline({ defaults: { ease: "none" } });
-  tl.to(state, { open: 1, duration: 1, ease: "m-soft", onUpdate: () => draw(state.open) }, 0)
-    .fromTo(".flor__bloom", { scale: 0.86, yPercent: 6 }, { scale: 1, yPercent: 0, duration: 1, ease: "m-soft" }, 0)
-    .fromTo(lines, { yPercent: 135 }, { yPercent: 0, duration: 0.35, ease: "m-out", stagger: 0.08 }, 0.45)
-    .fromTo(".flor__note", { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.3, ease: "m-out" }, 0.7)
-    .to({}, { duration: 0.2 });
-  ScrollTrigger.create({
-    trigger: ".flor__pin",
-    start: "top top",
-    end: () => `+=${window.innerHeight * (mobile ? 1 : 1.6)}`,
-    pin: true,
-    scrub: mobile ? 0.35 : true,
-    animation: tl,
-    invalidateOnRefresh: true,
-  });
-  draw(0);
-}
-
-/* 05: desktop pins and slides the session sideways; phones swipe natively */
+/* 04: desktop pins and slides the session sideways; phones swipe natively */
 function sesion() {
   const strip = document.querySelector(".strip");
   if (mobile) {
